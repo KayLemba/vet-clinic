@@ -17,12 +17,12 @@ SELECT * FROM animals WHERE animal_name != 'Gabumon';
 SELECT * FROM animals WHERE weight_per_kg >= '10.4' AND weight_per_kg <= '17.3';
 
 
-/* Transaction 1 */
+/* Transaction (A) */
 UPDATE animals SET species = 'Unspecified'
 ROLLBACK;
 SELECT * FROM animals;
 
-/* Transaction 2 set species name to 'digimon' and update all animals that dont have species to 'pokemon' */
+/* Transaction (B) set species name to 'digimon' and update all animals that dont have species to 'pokemon' */
 SELECT * FROM animals;
 UPDATE animals SET species='digimon' WHERE name LIKE '%mon';
 UPDATE animals SET species='pokemon' WHERE species IS NULL;
@@ -35,7 +35,7 @@ DELETE * FROM animals;
 ROLLBACK;
 SELECT * FROM animals;
 
-/* Transaction 3 update animals weight, create savepoint, change negative values for kg */
+/* Transaction (C) update animals weight, create savepoint, change negative values for kg */
 BEGIN;
 DELETE FROM animals WHERE date_of_birth>'2022-01-01';
 SAVEPOINT dateOfBirth;
