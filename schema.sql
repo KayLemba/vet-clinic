@@ -1,8 +1,8 @@
 /* Database schema to keep the structure of entire database. This creates the animals table */
-
+DROP TABLE IF EXISTS animals;
 CREATE TABLE animals (
     id SERIAL PRIMARY KEY NOT NULL,
-    animal_name varchar(100),
+    name varchar(100),
     date_of_birth date NOT NULL,
     escape_attempts integer,
     neutered boolean NOT NULL,
@@ -61,3 +61,6 @@ CREATE TABLE visits (
  CONSTRAINT vet_fk FOREIGN KEY(vets_id) REFERENCES vets(id),
  CONSTRAINT animals_fk FOREIGN KEY(animals_id) REFERENCES animals(id)
 );
+
+-- Add an email column to your owners table
+ALTER TABLE owners ADD COLUMN email VARCHAR(120);
